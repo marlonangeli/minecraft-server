@@ -1,0 +1,33 @@
+name: minecraft-server
+
+services:
+  minecraft-server:
+    container_name: minecraft-server
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
+    ports:
+      - 25565:25565
+    healthcheck:
+      test: mc-health
+      start_period: 1m
+      interval: 30s
+      retries: 20
+    environment:
+      EULA: "TRUE" # required
+      VERSION: "1.19.2"
+      TYPE: "PAPER"
+      MEMORY: "2G"
+      ONLINE_MODE: "false"
+      # FORCE_WORLD_COPY: "false"
+      # WORLD: "/world"
+
+      DIFFICULTY: "normal"
+      ICON: "https://github.com/marlonangeli/minecraft-server/blob/main/icon.jpeg"
+      MOTD: "Servidor do Marlon" # https://mctools.org/motd-creator
+    volumes:
+      - ./data:/data
+      - ./mods:/mods
+      - ./plugins:/plugins
+      - ./world:/world
+      - ./logs:/logs
