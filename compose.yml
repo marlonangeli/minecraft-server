@@ -16,18 +16,20 @@ services:
     environment:
       EULA: "TRUE" # required
       VERSION: "1.19.2"
-      TYPE: "PAPER"
-      MEMORY: "2G"
+      TYPE: "FORGE"
+      MAX_MEMORY: "16G"
       ONLINE_MODE: "false"
-      # FORCE_WORLD_COPY: "false"
-      # WORLD: "/world"
-
       DIFFICULTY: "normal"
-      ICON: "https://github.com/marlonangeli/minecraft-server/blob/main/icon.jpeg"
+      ICON: "https://raw.githubusercontent.com/marlonangeli/minecraft-server/main/icon.png"
       MOTD: "Servidor do Marlon" # https://mctools.org/motd-creator
     volumes:
       - ./data:/data
       - ./mods:/mods
       - ./plugins:/plugins
-      - ./world:/world
-      - ./logs:/logs
+      - ./logs:/data/logs
+    networks:
+      - minecraft
+
+networks:
+  minecraft:
+    driver: bridge
