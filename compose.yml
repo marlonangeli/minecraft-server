@@ -32,4 +32,5 @@ services:
 
 networks:
   minecraft:
+    name: minecraft
     driver: bridge
