@@ -19,7 +19,13 @@ services:
       TYPE: "FORGE"
       MAX_MEMORY: "16G"
       ONLINE_MODE: "false"
+      
       DIFFICULTY: "normal"
+      OP_PERMISSION_LEVEL: "4"
+      ENABLE_WHITELIST: "true"
+
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: ${RCON_PASSWORD}
       ICON: "https://raw.githubusercontent.com/marlonangeli/minecraft-server/main/icon.png"
       MOTD: "Servidor do Marlon" # https://mctools.org/motd-creator
     volumes:
