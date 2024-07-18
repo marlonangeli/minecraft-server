@@ -7,7 +7,8 @@ services:
     tty: true
     stdin_open: true
     ports:
-      - 25565:25565
+      - 25565:25565/tcp
+      - 25565:25565/udp
     healthcheck:
       test: mc-health
       start_period: 1m
@@ -15,26 +16,36 @@ services:
       retries: 20
     environment:
       EULA: "TRUE" # required
-      VERSION: "1.19.2"
-      TYPE: "FORGE"
+      VERSION: 1.19.2
+      TYPE: AUTO_CURSEFORGE
       MAX_MEMORY: "16G"
-      ONLINE_MODE: "false"
-      
-      DIFFICULTY: "normal"
-      OP_PERMISSION_LEVEL: "4"
-      ENABLE_WHITELIST: "true"
+      ONLINE_MODE: false
+      ENABLE_QUERY: true
 
-      ENABLE_RCON: "true"
+      # https://www.curseforge.com/minecraft/modpacks/hazardousdaniels-unlimited
+      CF_API_KEY: ${CF_API_KEY}
+      CF_SLUG: hazardousdaniels-unlimited
+      CF_FILENAME_MATCHER: 1.2.1
+
+      DIFFICULTY: normal
+      OP_PERMISSION_LEVEL: 4
+      ENABLE_WHITELIST: true
+      WHITELIST_FILE: /whitelist.json
+
+      ENABLE_RCON: true
       RCON_PASSWORD: ${RCON_PASSWORD}
       ICON: "https://raw.githubusercontent.com/marlonangeli/minecraft-server/main/icon.png"
       MOTD: "Servidor do Marlon" # https://mctools.org/motd-creator
     volumes:
-      - ./data:/data
-      - ./mods:/mods
-      - ./plugins:/plugins
-      - ./logs:/data/logs
+      - minecraft-data:/data
+      - ./plugins:/data/plugins
+      - ./whitelist.json:/whitelist.json
     networks:
       - minecraft
+
+volumes:
+  minecraft-data:
+    name: minecraft-data
 
 networks:
   minecraft:
