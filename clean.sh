@@ -1,9 +1,5 @@
 #!/usr/bin/bash
 
-remove_files() {
-    rm -rf $1
-}
-
 docker_down() {
     docker compose down
 }
