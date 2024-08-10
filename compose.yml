@@ -16,7 +16,7 @@ services:
     environment:
       EULA: "TRUE" # required
       VERSION: 1.19.2
-      MOD_PLATFORM: AUTO_CURSEFORGE
+      TYPE: AUTO_CURSEFORGE
       MAX_MEMORY: "16G"
       ONLINE_MODE: false
       ENABLE_QUERY: true
@@ -30,11 +30,12 @@ services:
       CF_API_KEY: ${CF_API_KEY}
       CF_SLUG: hazardousdaniels-unlimited      
 
-      PLUGINS: /data/plugins/OpenLogin.jar
+      # https://www.spigotmc.org/resources/openlogin-1-7x-1-21x.57272/
+      SPIGET_RESOURCES: 57272
 
       DIFFICULTY: normal
       OP_PERMISSION_LEVEL: 4
-      ENABLE_WHITELIST: true
+      ENABLE_WHITELIST: false
 
       OPS: "Wouldy1"
       MAX_PLAYERS: 10
@@ -45,7 +46,6 @@ services:
       MOTD: "Servidor do Marlon" # https://mctools.org/motd-creator
     volumes:
       - minecraft-data:/data
-      - ./plugins:/data/plugins
       - ./whitelist.json:/data/whitelist.json
     networks:
       - minecraft
