@@ -7,7 +7,7 @@ Servidor de Minecraft rodando em um container Docker.
 ### CurseForge
 
 1. Acesse o CurseForge e baixe o modpack [`HazardousDaniel's Unlimited`](https://www.curseforge.com/minecraft/modpacks/hazardousdaniels-unlimited).
-2. Jogue, simples assim :happy:.
+2. Jogue, simples assim 😄.
 
 ---
 
