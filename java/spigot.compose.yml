@@ -1,0 +1,48 @@
+name: minecraft-spigot-server
+
+services:
+  mc-spigot-server:
+    container_name: minecraft-spigot-server
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
+    ports:
+      - 25565:25565
+    healthcheck:
+      test: mc-health
+      start_period: 1m
+      interval: 30s
+      retries: 20
+    environment:
+      TZ: "America/Sao_Paulo"
+      EULA: "TRUE" # required
+      
+      # NEEDS TO CONFIGURE SPIGOT PLUGINS
+      MAX_MEMORY: "16G"
+      ONLINE_MODE: false
+      ENABLE_QUERY: true  
+
+      DIFFICULTY: normal
+      OP_PERMISSION_LEVEL: 4
+      ENABLE_WHITELIST: false
+
+      OPS: "Wouldy1"
+      MAX_PLAYERS: 10
+
+      ENABLE_RCON: true
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      ICON: "https://raw.githubusercontent.com/marlonangeli/minecraft-server/main/icon.png"
+      MOTD: "\u00A7nServidor do Marlon\u00A7r\n\u00A7l\u00A74S P I G O T" # https://mctools.org/motd-creator
+    volumes:
+      - mc-spigot:/data
+    networks:
+      - mc-spigot
+
+volumes:
+  mc-spigot:
+    name: minecraft-spigot-data
+
+networks:
+  mc-spigot:
+    name: minecraft-spigot-network
+    driver: bridge

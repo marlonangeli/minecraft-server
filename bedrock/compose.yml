@@ -1,0 +1,32 @@
+name: minecraft-bedrock-server
+
+services:
+  mc-bedrock-server:
+    container_name: minecraft-bedrock-server
+    image: itzg/minecraft-bedrock-server
+    stdin_open: true
+    tty: true  
+    ports:
+      - "19132:19132/udp"
+    environment:
+      EULA: "TRUE"
+      TZ: "America/Sao_Paulo"
+      VERSION: LATEST
+      DIFFICULTY: normal
+      OPS: "Wouldy1"
+      LEVEL_NAME: "marlonworld"
+      SERVER_NAME: "Servidor do Marlon"
+    volumes:
+      - mc-bedrock:/data
+    networks:
+      - mc-bedrock
+
+volumes:
+  mc-bedrock:
+    name: minecraft-bedrock-data
+
+networks:
+  mc-bedrock:
+    name: minecraft-bedrock
+    driver: bridge
+    
