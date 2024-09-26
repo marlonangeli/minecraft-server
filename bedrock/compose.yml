@@ -14,7 +14,7 @@ services:
       VERSION: LATEST
       DIFFICULTY: normal
       OPS: "Wouldy1"
-      LEVEL_NAME: "marlonworld"
+      LEVEL_NAME: "world"
       SERVER_NAME: "Servidor do Marlon"
     volumes:
       - mc-bedrock:/data
@@ -27,6 +27,6 @@ volumes:
 
 networks:
   mc-bedrock:
-    name: minecraft-bedrock
+    name: minecraft-bedrock-network
     driver: bridge
     
