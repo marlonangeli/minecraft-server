@@ -13,11 +13,14 @@ services:
       TZ: "America/Sao_Paulo"
       VERSION: LATEST
       DIFFICULTY: normal
-      OPS: "Wouldy1"
-      LEVEL_NAME: "world"
+      ALLOW_CHEATS: "true"
+      OPS: "2535447897623967,2535467148868769"
+      LEVEL_NAME: "realms"
       SERVER_NAME: "Servidor do Marlon"
     volumes:
+      - ./realms:/data/worlds/realms
       - mc-bedrock:/data
+
     networks:
       - mc-bedrock
 
