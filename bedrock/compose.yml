@@ -17,6 +17,9 @@ services:
       OPS: "2535447897623967,2535467148868769"
       LEVEL_NAME: "realms"
       SERVER_NAME: "Servidor do Marlon"
+      COMPRESSION_THRESHOLD: 64
+      COMPRESSION_ALGORITHM: zstd
+
     volumes:
       - ./realms:/data/worlds/realms
       - mc-bedrock:/data
