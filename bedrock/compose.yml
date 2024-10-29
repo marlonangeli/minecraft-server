@@ -18,7 +18,7 @@ services:
       LEVEL_NAME: "realms"
       SERVER_NAME: "Servidor do Marlon"
       COMPRESSION_THRESHOLD: 64
-      COMPRESSION_ALGORITHM: zstd
+      COMPRESSION_ALGORITHM: zlib
 
     volumes:
       - ./realms:/data/worlds/realms
