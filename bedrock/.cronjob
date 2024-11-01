@@ -1,1 +1,2 @@
-5 2-23/4 * * * /home/ubuntu/docker/minecraft-server/restart_dumb_server.sh -y >> /home/ubuntu/docker/minecraft-server/bedrock/restart_minecraft.log 2>&1
+0 2 * * * $HOME/docker/minecraft-server/bedrock/restart_server.sh
+0 6 * * * $HOME/docker/minecraft-server/bedrock/restart_server.sh
