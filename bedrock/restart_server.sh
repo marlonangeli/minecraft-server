@@ -2,18 +2,21 @@
 
 # Definição de constantes e configurações
 readonly SCRIPT_NAME=$(basename "$0")
+readonly PROJECT_DIR="$HOME/docker/minecraft-server/bedrock"
 readonly BACKUP_DIR="$HOME/docker/backups/minecraft-bedrock"
-readonly REALMS_DIR="$HOME/docker/minecraft-server/bedrock/realms"  # Ajuste conforme necessário
+readonly REALMS_DIR="$PROJECT_DIR/realms"  # Ajuste conforme necessário
 readonly BACKUP_DONE_FILE="/tmp/minecraft_backup_done"
-readonly LOG_DIR="$HOME/docker/minecraft-server/bedrock"
+readonly LOG_DIR="$PROJECT_DIR"
 readonly LOG_FILE="$LOG_DIR/backup.log"
-readonly DOCKER_COMPOSE_FILE="compose.yml"
+readonly DOCKER_COMPOSE_FILE="$PROJECT_DIR/compose.yml"
 readonly CONTAINER_NAME="minecraft-bedrock-server"
+
+cd "$PROJECT_DIR" || exit 1
 
 # Configurações de horário
 readonly BACKUP_HOUR=2    # 2:00 AM
 readonly START_HOUR=6     # 6:00 AM
-readonly WARNING_TIME=60  # Tempo de aviso em segundos
+readonly WARNING_TIME=5  # Tempo de aviso em segundos
 
 # Função para logging
 log() {
@@ -141,6 +144,8 @@ do_backup() {
 
 # Função principal
 main() {
+    local force=$1
+
     # Verifica hora atual
     local current_hour
     current_hour=$(date +'%H')
@@ -149,6 +154,15 @@ main() {
     check_dependencies
     check_docker_compose
     create_directories
+
+    if [ "$force" == "force" ]; then
+        log "INFO" "Reiniciando servidor forçadamente"
+        check_container
+        stop_server
+        do_backup
+        start_server
+        exit 0
+    fi
     
     case $current_hour in
         $BACKUP_HOUR)
@@ -175,7 +189,12 @@ main() {
 # Tratamento de sinais
 trap 'log "ERROR" "Script interrompido"; exit 1' SIGINT SIGTERM
 
+# Recebe argumentos
+if [ "$1" == "--force" ]; then
+    main "force"
+    exit 0
+fi
+
 # Executa função principal
 main
-
 exit 0
