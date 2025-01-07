@@ -1,8 +1,8 @@
-name: minecraft-unlimited-server
+name: minecraft-mods-server
 
 services:
-  mc-unlimited-server:
-    container_name: minecraft-unlimited-server
+  mc-mods-server:
+    container_name: minecraft-mods-server
     image: itzg/minecraft-server
     tty: true
     stdin_open: true
@@ -13,19 +13,22 @@ services:
       start_period: 1m
       interval: 30s
       retries: 20
+    env_file:
+      - .env
     environment:
       TZ: "America/Sao_Paulo"
       EULA: "TRUE" # required
-      VERSION: 1.19.2
+      VERSION: 1.20.1
       TYPE: AUTO_CURSEFORGE
       MAX_MEMORY: "16G"
       ONLINE_MODE: false
       ENABLE_QUERY: true
 
-      # https://www.curseforge.com/minecraft/modpacks/hazardousdaniels-unlimited
+      # https://www.curseforge.com/minecraft/modpacks/better-mc-forge-bmc4
       CF_API_KEY: ${CF_API_KEY}
-      CF_SLUG: hazardousdaniels-unlimited      
-
+      CF_SLUG: better-mc-forge-bmc4
+      CF_FILENAME_MATCHER: v36
+      
       DIFFICULTY: normal
       OP_PERMISSION_LEVEL: 4
       ENABLE_WHITELIST: false
@@ -36,17 +39,17 @@ services:
       ENABLE_RCON: true
       RCON_PASSWORD: ${RCON_PASSWORD}
       ICON: "https://raw.githubusercontent.com/marlonangeli/minecraft-server/main/icon.png"
-      MOTD: "\u00A7nServidor do Marlon\u00A7r\n\u00A7l\u00A74U N L I M I T E D" # https://mctools.org/motd-creator
+      MOTD: "                 \u00A7l\u00A7fB E T T E R \u00A75\u00A7lM C" # https://mctools.org/motd-creator
     volumes:
-      - mc-unlimited:/data
+      - mc-mods:/data
     networks:
-      - mc-unlimited
+      - mc-mods
 
 volumes:
-  mc-unlimited:
-    name: minecraft-unlimited-data
+  mc-mods:
+    name: minecraft-mods-data
 
 networks:
-  mc-unlimited:
-    name: minecraft-unlimited-network
+  mc-mods:
+    name: minecraft-mods-network
     driver: bridge
